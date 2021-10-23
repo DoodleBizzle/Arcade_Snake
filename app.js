@@ -58,7 +58,7 @@ function makeBoard(){
 }
 
 // ---------------- Update State-------------------------------
-setInterval(tick, 1000 / 30)
+setInterval(tick, 1000 / 25)
 
 function tick() {
     fruits();
