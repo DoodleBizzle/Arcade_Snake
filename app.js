@@ -10,6 +10,14 @@ let gameState = {
     snake: snake
 }
 
+ let snakeDirection = {
+     up : true,
+     down : true,
+     left : false,
+     right : true,
+ }
+
+
 // global Elements
 const board = document.querySelector('#gameBoard');
 const score = document.querySelector('#Score')
@@ -58,14 +66,17 @@ function makeBoard(){
 }
 
 // ---------------- Update State-------------------------------
-setInterval(tick, 1000 / 25)
+setInterval(tick, 1000 / 1)
+makeBoard();
 
 function tick() {
     fruits();
     renderSnake();
+    // gameOver();
     snakeMovement();
+    
 }
-makeBoard();
+
 
 
 //-------------------Render Game--------------------------------
@@ -89,6 +100,20 @@ function fruits(){
 
 }
 
+function gameOver (){
+    const index = snake.body.length -1 ;
+    const head = snake.body[index];
+    if( head[0] > 99){
+        return 
+    }else if (head[0] < 0){
+        return
+    } else if (head[1] > 99){
+        return
+    } else if ( head[1] < 0){
+        return
+    }
+}
+
 //---------------------Actions done in Game -----------------------------
 
 function snakeMovement() {
@@ -108,24 +133,38 @@ function snakeMovement() {
         removeTailClass();
         snake.body.shift()
     }
-    ;
+    
     
 }
 
 document.addEventListener('keydown', (event) =>{
         let input = snake.nextDirection;
-        if (event.code === "ArrowUp"){
+        
+        
+        if (event.code === "ArrowUp" && snakeDirection.up === true){
             input[0] = 0;
             input[1] = -1;
-        } else if (event.code === "ArrowDown"){
+            snakeDirection.down = false;
+            snakeDirection.right = true;
+            snakeDirection.left = true;
+        } else if (event.code === "ArrowDown" && snakeDirection.down === true){
             input[0] = 0;
             input[1] = 1;
-        } else if (event.code === "ArrowLeft") {
+            snakeDirection.up = false;
+            snakeDirection.right = true;
+            snakeDirection.left = true;
+        } else if (event.code === "ArrowLeft" && snakeDirection.left === true) {
             input[0] = -1;
             input[1] = 0;
-        } else if (event.code === "ArrowRight") {
-            input[0] = 1;
-            input[1] = 0;
+            snakeDirection.right = false;
+            snakeDirection.down = true;
+            snakeDirection.up = true;
+        } else if (event.code === "ArrowRight" && snakeDirection.right === true){
+          input[0] = 1;
+          input[1] = 0;
+          snakeDirection.left = false;
+          snakeDirection.down = true;
+          snakeDirection.up = true;
         }
         
     })
