@@ -22,9 +22,11 @@ let snakeDirection = {
 
 let speed = 100
 
+let scoreTotal = 0;
+
 // global Elements
 const board = document.querySelector("#gameBoard");
-const score = document.querySelector("#Score");
+const score = document.querySelector("#ScoreTotal");
 
 //---------------Helper Functions----------------------------
 function removeTailClass() {
@@ -63,6 +65,11 @@ const headInBody = (head) => {
         }
     }
     return false;
+}
+
+const increaseScore = () => {
+    scoreTotal++
+    score.textContent = scoreTotal
 }
 //-----------------Make Board--------------------------------
 // row = index = y
@@ -136,6 +143,7 @@ function snakeMovement() {
     removeTailClass();
     removeAppleClass();
     randomizeApple();
+    increaseScore();
   } else if (headInBody(newHead)){
       clearInterval(gameLoop)
     } else {
@@ -148,25 +156,25 @@ function snakeMovement() {
 document.addEventListener("keydown", (event) => {
   let input = snake.nextDirection;
 
-  if (event.code === "ArrowUp" && snakeDirection.up === true) {
+  if ((event.code === "ArrowUp" || event.code === "KeyW") && snakeDirection.up === true) {
     input[0] = 0;
     input[1] = -1;
     snakeDirection.down = false;
     snakeDirection.right = true;
     snakeDirection.left = true;
-  } else if (event.code === "ArrowDown" && snakeDirection.down === true) {
+  } else if ((event.code === "ArrowDown" || event.code === "KeyS") && snakeDirection.down === true) {
     input[0] = 0;
     input[1] = 1;
     snakeDirection.up = false;
     snakeDirection.right = true;
     snakeDirection.left = true;
-  } else if (event.code === "ArrowLeft" && snakeDirection.left === true) {
+  } else if ((event.code === "ArrowLeft" || event.code === "KeyA") && snakeDirection.left === true) {
     input[0] = -1;
     input[1] = 0;
     snakeDirection.right = false;
     snakeDirection.down = true;
     snakeDirection.up = true;
-  } else if (event.code === "ArrowRight" && snakeDirection.right === true) {
+  } else if ((event.code === "ArrowRight" || event.code === "KeyD") && snakeDirection.right === true) {
     input[0] = 1;
     input[1] = 0;
     snakeDirection.left = false;
