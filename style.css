@@ -15,6 +15,11 @@ body{
     width: 100vw;
 }
 
+#Score{
+    display: flex;
+    flex-direction: row;
+}
+
 #gameBoard{
     display: grid;
     background-color: gray;
