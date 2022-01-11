@@ -20,13 +20,14 @@ let snakeDirection = {
   right: true,
 };
 
-let speed = 100
+let speed = 1000;
 
 let scoreTotal = 0;
 
 // global Elements
 const board = document.querySelector("#gameBoard");
 const score = document.querySelector("#ScoreTotal");
+const startButton = document.getElementById("startButton")
 
 //---------------Helper Functions----------------------------
 function removeTailClass() {
@@ -122,10 +123,8 @@ function gameOver() {
   const head = snake.body[index];
   if (head[0] > 99 || head[0] < 0) {
     clearInterval(gameLoop);
-    console.log("GAME OVER")
   } else if (head[1] > 99 || head[1] < 0) {
     clearInterval(gameLoop);
-    console.log("GAME OVER")
   }
 }
 
@@ -182,3 +181,7 @@ document.addEventListener("keydown", (event) => {
     snakeDirection.up = true;
   }
 });
+
+startButton.addEventListener('click', ()=>{
+    location.reload();
+})

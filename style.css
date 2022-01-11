@@ -18,6 +18,12 @@ body{
 #Score{
     display: flex;
     flex-direction: row;
+    align-items: center;
+}
+
+#startButton {
+    height: 1.25rem;
+    margin-left: 30rem;
 }
 
 #gameBoard{
