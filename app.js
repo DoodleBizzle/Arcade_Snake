@@ -88,7 +88,7 @@ function makeBoard() {
 
 // ---------------- Update State-------------------------------
 
-const gameLoop = setInterval(tick, speed);
+const gameLoop = setInterval(tick, 1000 / 30);
 makeBoard();
 
 function tick() {
